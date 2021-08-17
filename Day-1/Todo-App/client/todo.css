@@ -1,0 +1,96 @@
+
+
+
+
+
+#title {
+    margin: 30px 0 30px 0;
+    color: chocolate;
+    font-size: 4em;
+}
+
+#enterTaskLabel {
+    font-size: 1.25em;
+    margin-right: 10px;
+}
+
+
+#priorityChoice {
+    height: 30px;
+    margin: 0 10px 0 10px;
+}
+
+#date {
+    margin-right:10px ;
+    height: 30px;
+}
+
+#addButton {
+    border: chocolate solid 1px;
+    border-radius: 7px;
+    height: 30px;
+    width: 90px;
+}
+
+.listGroups {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+li {
+    margin-bottom: 20px;
+    list-style-type: none;
+    background-color: antiquewhite;
+    border: chocolate solid 1px ;
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size: 1.3em;
+
+}
+
+#pendingUl {
+    width :60%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+#taskTitle {
+    color: chocolate;
+    margin: 30px 0 20px 0;
+}
+
+#removeBtn {
+    border-radius: 7px;
+    margin-left: 10px;
+    border: rgb(209, 136, 68) solid 1px;
+}
+
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+    li{
+        font-size: .75em;
+
+    } 
+    #pendingUL {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-widht: 481px) and (max-width: 768px) {
+    li{
+        font-size: .75em;
+
+    } 
+    #pendingUL {
+        width: 100%;
+    }
+
+}
