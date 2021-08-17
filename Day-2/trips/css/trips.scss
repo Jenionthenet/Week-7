@@ -1,0 +1,72 @@
+@import "./variables";
+
+
+.container {
+    margin-top: 50px;
+}
+
+#title {
+    font-size: $fontSize;
+}
+
+h1 {
+    margin : 50px 0 20px 0;
+    @include flexCenter();
+    color: $fontColor;
+}
+
+#inputDiv {
+    @include flexCenter();
+    input {
+        margin-right: 10px;
+        width: 200px;
+        border-radius:$btnRadius ;
+    }
+}
+
+h3 {
+    color: $fontColor;
+    @include flexCenter();
+}
+input {
+    height: $inputHeight;
+}
+
+button {
+    height: $inputHeight;
+    border-radius: $btnRadius;
+    &:hover{
+        background: rgb(226, 156, 156);
+    }
+}
+
+ul {
+    @include flexCenter();
+}
+
+li{
+
+    list-style-type: none;
+
+}
+
+img {
+    height: 400px;
+    border-radius: 10px;
+    
+}
+
+#tripContainer {
+    border: $fontColor solid 3px;
+}
+
+#delete {
+    background-color: transparent;
+    border-radius: $btnRadius;
+    border: #240768 solid 1px;
+     
+    border: white solid 2px;
+    &:hover {
+        background: coral;
+    }
+}

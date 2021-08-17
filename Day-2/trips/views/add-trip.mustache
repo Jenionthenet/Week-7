@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/trips.css">
+</head>
+
+<body>
+    <div id="container">
+        <h1 id="title">Add Trip</h1>
+
+        <form method="POST" action="/add-trip">
+            <div id="inputDiv">
+                <input type="text" placeholder="Enter title" name="title" />
+                <input type="text" placeholder="Enter image Url" name="image" />
+                <input type="date" name="departureDate" />
+                <input type="date" name="returnDate" />
+                <button>Enter</button>
+            </div>
+        </form>
+
+        <h1>Trips</h1>
+        <h3>Total Number of Trips: {{totalTrips}}</h3>
+        <ul>
+            {{#allTrips}}
+            <li>
+                <form method="POST" action="/delete-trip">
+                    <div class="tripContainer">
+                        
+                        <div class="tripInfo">
+                            <h3>{{title}}</h3> From: {{departureDate}} To:
+                            {{returnDate}}
+                            <input type="hidden" value="{{tripId}}" name="tripId" id="">
+                            <button id="delete">Delete</button>
+                        </div>
+                        <div><img src="{{image}}" alt=""></div>
+                    </div>
+
+
+                </form>
+            </li>
+
+            {{/allTrips}}
+        </ul>
+    </div>
+</body>
+
+</html>

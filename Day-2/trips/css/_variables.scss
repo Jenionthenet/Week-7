@@ -1,0 +1,13 @@
+$fontColor: rgb(36, 7, 104);
+$fontSize: 3em;
+
+$inputHeight: 30px;
+
+$btnRadius: 7px;
+
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
