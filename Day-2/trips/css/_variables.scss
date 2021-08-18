@@ -1,13 +1,15 @@
 $fontColor: rgb(36, 7, 104);
 $fontSize: 3em;
 
-$inputHeight: 30px;
+$inputHeight: 40px;
 
 $btnRadius: 7px;
+$lgBorderRadius: 12px;
 
 
-@mixin flexCenter {
+@mixin flexCenter($direction) {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: $direction;
 }

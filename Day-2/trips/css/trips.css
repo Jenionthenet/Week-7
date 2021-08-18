@@ -7,7 +7,7 @@
 }
 
 h1 {
-  margin: 50px 0 20px 0;
+  margin: 50px 0 30px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -17,6 +17,10 @@ h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   color: #240768;
 }
 
@@ -30,12 +34,18 @@ h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 #inputDiv input {
   margin-right: 10px;
   width: 200px;
   border-radius: 7px;
+  height: 40px;
+  font-size: 1.2em;
 }
 
 h3 {
@@ -49,14 +59,15 @@ h3 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-input {
-  height: 30px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 button {
-  height: 30px;
+  width: 70px;
+  height: 40px;
   border-radius: 7px;
 }
 
@@ -74,6 +85,10 @@ ul {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 li {
@@ -82,21 +97,64 @@ li {
 
 img {
   height: 400px;
-  border-radius: 10px;
+  border-radius: 12px;
+  margin: 20px 20px 20px 50px;
 }
 
-#tripContainer {
+.tripContainer {
   border: #240768 solid 3px;
+  border-radius: 12px;
+  margin: 10px 0;
+  background-color: #e6ebf8;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.tripInfo {
+  margin-left: 20px;
+  color: #240768;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.tripInfo h3 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.tripInfo h4 {
+  font-size: 1.2em;
 }
 
 #delete {
   background-color: transparent;
   border-radius: 7px;
-  border: white solid 2px;
+  border: #240768 solid 1px;
 }
 
 #delete:hover {
   background: coral;
-  border: #240768 solid 1px;
 }
 /*# sourceMappingURL=trips.css.map */

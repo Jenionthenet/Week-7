@@ -25,10 +25,11 @@
             <li>
                 <form method="POST" action="/delete-trip">
                     <div class="tripContainer">
-                        
+
                         <div class="tripInfo">
-                            <h3>{{title}}</h3> From: {{departureDate}} To:
-                            {{returnDate}}
+                            <h3>{{title}}</h3>
+                            <h4>From: {{departureDate}} To:
+                                {{returnDate}}</h4>
                             <input type="hidden" value="{{tripId}}" name="tripId" id="">
                             <button id="delete">Delete</button>
                         </div>
