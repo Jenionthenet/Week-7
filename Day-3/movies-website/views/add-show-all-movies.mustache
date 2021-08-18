@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="/css/movie-styles.css">
+    <title>All Movies</title>
+</head>
+
+<body>
+    <h1>Add a Movie</h1>
+    <form method="POST" action="/movies/create">
+        <input type="text" placeholder="Add movie title" name="title" id="">
+        <input type="text" placeholder="Add movie descirption" name="description" id="">
+
+        <select name="genre" id="">
+            <option value="" selected disabled hidden>Genre</option>
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="horror">Horror</option>
+            <option value="mystery">Mystery</option>
+            <option value="musicals">Musicals</option>
+            <option value="romance">Romance</option>
+            <option value="thriller">Thriller</option>
+        </select>
+        <input type="text" name="posterUrl" placeholder="Add movie poster url" id="">
+
+        <button>Add Movie</button>
+    </form>
+
+    <h1>Movies</h1>
+    <ul>
+        {{#allMovies}}
+        <!--start of the loop -->
+        <li>
+            <form method="POST" action="/movies/delete">
+                <a href="/movies/{{movieId}}">
+                    <div>
+                        <h2>{{title}}</h2>
+                        <button>Delete</button>
+                        <img src="{{posterUrl}}" alt="">
+                        <input type="hidden" name="movieId" value="{{movieId}}" id="">
+                    </div>
+                </a>
+            </form>
+        </li>
+        {{/allMovies}}
+    </ul>
+
+
+</body>
+
+</html>
