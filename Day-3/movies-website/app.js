@@ -4,6 +4,7 @@ const mustacheExpress = require('mustache-express')
 const moviesRouter = require('./routes/movies')
 
 app.use("/css",express.static("css"))
+app.use("/js",express.static("scripts"))
 app.use(express.urlencoded())
 app.use("/movies", moviesRouter)
 app.engine('mustache', mustacheExpress())

@@ -1,53 +1,76 @@
 <html>
 
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/movie-styles.css">
     <title>All Movies</title>
 </head>
 
 <body>
-    <h1>Add a Movie</h1>
-    <form method="POST" action="/movies/create">
-        <input type="text" placeholder="Add movie title" name="title" id="">
-        <input type="text" placeholder="Add movie descirption" name="description" id="">
+    <div class="container-fluid" id="container">
+        <div class= "row" id="inputBar">
+            <h1 class = "col-2"id="addMoviesTitle">Add a Movie</h1>
+            <form method="POST" action="/movies/create">
+                <div class= "col-10" id="input">
+                    <input type="text" placeholder="Add movie title" name="title" id="">
+                    <select name="genre" id="dropDown">
+                        <option value="" selected disabled hidden>Genre</option>
+                        <option value="action">Action</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="drama">Drama</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="horror">Horror</option>
+                        <option value="mystery">Mystery</option>
+                        <option value="musicals">Musicals</option>
+                        <option value="romance">Romance</option>
+                        <option value="thriller">Thriller</option>
+                    </select>
+                    <input type="text" placeholder="Add movie descirption" name="description" id="">
 
-        <select name="genre" id="">
-            <option value="" selected disabled hidden>Genre</option>
-            <option value="action">Action</option>
-            <option value="comedy">Comedy</option>
-            <option value="drama">Drama</option>
-            <option value="fantasy">Fantasy</option>
-            <option value="horror">Horror</option>
-            <option value="mystery">Mystery</option>
-            <option value="musicals">Musicals</option>
-            <option value="romance">Romance</option>
-            <option value="thriller">Thriller</option>
-        </select>
-        <input type="text" name="posterUrl" placeholder="Add movie poster url" id="">
+                    <input type="text" name="posterUrl" placeholder="Add movie poster url" id="">
 
-        <button>Add Movie</button>
-    </form>
+                    <button>Add Movie</button>
+                </div>
+        </div>
+        </form>
 
-    <h1>Movies</h1>
-    <ul>
-        {{#allMovies}}
-        <!--start of the loop -->
-        <li>
-            <form method="POST" action="/movies/delete">
-                <a href="/movies/{{movieId}}">
-                    <div>
-                        <h2>{{title}}</h2>
-                        <button>Delete</button>
-                        <img src="{{posterUrl}}" alt="">
-                        <input type="hidden" name="movieId" value="{{movieId}}" id="">
-                    </div>
-                </a>
-            </form>
-        </li>
-        {{/allMovies}}
-    </ul>
-
-
+        <div id="movieSectionContainer">
+            <h1 id="moviesSectionTitle">Movies</h1>
+            <select name="genre" id="genreDropDown">
+                <option value="" selected disabled hidden>Filter Movies by Genre</option>
+                <option value="action">Action</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="horror">Horror</option>
+                <option value="mystery">Mystery</option>
+                <option value="musicals">Musicals</option>
+                <option value="romance">Romance</option>
+                <option value="thriller">Thriller</option>
+            </select>
+            <ul>
+                {{#allMovies}}
+                <!--start of the loop -->
+                <li>
+                    <form method="POST" action="/movies/delete">
+                        <a href="/movies/{{movieId}}">
+                            <div>
+                                <span>
+                                    <h2 id="movieTitle">{{title}}</h2>
+                                    <button>Delete</button>
+                                </span>
+                                <div><img src="{{posterUrl}}" alt=""></div>
+                                <input type="hidden" name="movieId" value="{{movieId}}" id="">
+                            </div>
+                        </a>
+                    </form>
+                </li>
+                {{/allMovies}}
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="/scripts/genre.js"></script>
 </body>
 
 </html>

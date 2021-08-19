@@ -1,0 +1,96 @@
+@mixin flexCenter($direction) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}
+
+$boxHeight: 40px;
+$inputFontHeight: 1.2em;
+$borderRadius: 15px;
+$titleFont: "Anton", sans-serif;
+
+#container {
+    display: flex;
+    flex-direction: column;
+}
+
+#addMoviesTitle {
+    padding: 20px 0 20px 0;
+   
+    color: white;
+    font-family: $titleFont;
+}
+
+#moviesSectionTitle {
+    margin-top: 200px;
+    font-size: 3em;
+    font-family: $titleFont;
+  }
+
+
+
+#inputBar {
+    display: flex;
+    background-color: black;
+    width: 100%;
+    position: fixed;
+}
+
+#input {
+   display: flex;
+    
+    
+    input {
+        margin-right: 10px;
+        height: $boxHeight;
+        width: 200px;
+        font-size: $inputFontHeight;
+    }
+
+}
+
+button {
+    height: $boxHeight;
+    font-size: $inputFontHeight;
+}
+#dropDown {
+    height: $boxHeight;
+    margin-right: 10px;
+    font-size: $inputFontHeight;
+
+}
+
+#genreDropDown {
+    @include flexCenter(row);
+    margin-right: 10px;
+    height: $boxHeight;
+    font-size: $inputFontHeight;
+}
+  
+img {
+    width: 400px;
+}
+
+a {
+    text-decoration: none;
+
+}
+
+li{
+    list-style-type: none;
+}
+
+// #movieSectionContainer {
+//     border: black 3px solid;
+//     border-radius: $borderRadius;
+// }
+ul{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 50px;
+    li{
+        margin: 60px;
+    }
+}

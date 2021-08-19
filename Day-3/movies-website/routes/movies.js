@@ -41,13 +41,13 @@ router.post('/delete', (req, res) => {
 })
 
 
-router.post('/genre/:genre', (req, res) => {
+router.get('/genre/:genre', (req, res) => {
     const genre = req.params.genre
 
     movies = moives.filter((movie) => {
         return movie.genre = genre
     })
-    res.redirect('/movies')
+    res.render('add-show-all-movies', {allMovies: movies})
 })
 
 

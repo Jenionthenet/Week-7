@@ -1,0 +1,102 @@
+#container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#addMoviesTitle {
+  padding: 20px 0 20px 0;
+  color: white;
+  font-family: "Anton", sans-serif;
+}
+
+#moviesSectionTitle {
+  margin-top: 200px;
+  font-size: 3em;
+  font-family: "Anton", sans-serif;
+}
+
+#inputBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: black;
+  width: 100%;
+  position: fixed;
+}
+
+#input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#input input {
+  margin-right: 10px;
+  height: 40px;
+  width: 200px;
+  font-size: 1.2em;
+}
+
+button {
+  height: 40px;
+  font-size: 1.2em;
+}
+
+#dropDown {
+  height: 40px;
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+#genreDropDown {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-right: 10px;
+  height: 40px;
+  font-size: 1.2em;
+}
+
+img {
+  width: 400px;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 50px;
+}
+
+ul li {
+  margin: 60px;
+}
+/*# sourceMappingURL=movie-styles.css.map */
