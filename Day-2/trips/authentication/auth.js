@@ -1,4 +1,6 @@
 function authenticate(req, res, next) {
+
+    console.log("AUTHENTICATE MIDDLEWARE")
     if(req.session) {
         if(req.session.userName) {
             next()
@@ -10,4 +12,4 @@ function authenticate(req, res, next) {
     }
 }
 
-module.exports =authenticate
+module.exports = authenticate

@@ -1,29 +1,56 @@
 const express = require('express')
-const app = express()
 const mustacheExpress = require('mustache-express')
 const session = require('express-session')
 const path = require('path')
+const tripsRouter = require('./routes/add-trip')
 
+const app = express()
 const VIEWS_PATH = path.join(__dirname, '/views')
+const authenticate = require('./authentication/auth.js')
+const http = require('http').Server(app)
+const io = require('socket.io')(http)
+
+app.use('/css',express.static("css"))
+app.use(express.static('images'))
+app.use('/js',express.static('js'))
+app.use(express.urlencoded())
+
+app.use(session({
+    secret: 'THISISSECRETKEY',
+    saveUninitialized: true,
+    resave: true
+}))
+
 
 app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 app.set('views', VIEWS_PATH)
 app.set('view engine', 'mustache')
 
-app.use('/css',express.static("css"))
-
-app.use(express.urlencoded())
-app.use(session({
-    secret: 'THISISSECRETKEY',
-    saveUninitialized: true
-}))
-
+app.use('/add-trip', authenticate, tripsRouter)
 let users = [ 
     {userName: "jenscott", password: "password"}, 
-    {userName: "happperson", password: "1234"}
+    {userName: "happyperson", password: "1234"}
 ]
 
-let trips = []
+
+ global.trips = [
+         {title: "New York", image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fG5ldyUyMHlvcmslMjBjaXR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", departureDate: "8-12-2021" , returnDate: "8-19-2021", userName: "jenscott"},
+         {title: "Philadelphia", image: "https://images.unsplash.com/photo-1618312776768-c5926372a2f5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHBoaWxhZGVscGhpYXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", departureDate: "9-12-2021" , returnDate: "9-19-2021", userName:"happyperson"}
+
+ ]
+
+ app.get('/chat', (req,res) => {
+    res.sendFile(__dirname + '/chat.html')
+})
+
+let chatMessage = []
+io.on('connection', (socket) => {
+    console.log('User connected....')
+
+    socket.on('GlobeTrippin', (chat) => {
+        io.emit('GlobeTrippin', chat)
+    })
+})
 
 app.get('/register', (req, res) => {
     res.render('register', {message: "Enter a username and password to register."})
@@ -78,46 +105,23 @@ app.get('/profile', (req, res) => {
 })
 
 
-
-app.post('/add-trip', (req, res) => {
-    
-    const title = req.body.title
-    const image = req.body.image
-    const departureDate = req.body.departureDate
-    const returnDate = req.body.returnDate
-    const userName = req.session.userName
-
-    let trip = {tripId: trips.length + 1, title: title, image: image, departureDate: departureDate, returnDate: returnDate, userName: userName}
-
-    trips.push(trip)
+app.get('/sign-out', (req, res) => {
+    req.session.destroy(error => {
+        
+        res.clearCookie('connect.sid')
+        res.redirect('/home')
+    }) 
     console.log(trips)
-    res.redirect('/add-trip')
 })
 
 app.get('/home', (req, res) => {
     
-    res.render('glogeTrippinHome', {message: "Until next time!"})
-})
-
-app.get('/add-trip', (req, res) => {
-    let userName = req.session.userName
-    trips = trips.filter((trip) => {
-        return trip.userName == userName
-    })
-    res.render('add-trip', {userName: userName, allTrips: trips, totalTrips: trips.length })
+    res.render('globeTrippinHome')
 })
 
 
-app.post('/delete-trip', (req, res) => {
-    const tripId = parseInt(req.body.tripId)
-
-    trips = trips.filter((trip) => {
-        return trip.tripId != tripId
-})
-    res.redirect('/add-trip')
-})
 
 
-app.listen(3000, () => {
-    console.log('Server is running...')
+http.listen(3000, () => {
+    console.log('Server is running today...')
 })

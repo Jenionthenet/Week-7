@@ -26,7 +26,7 @@
         <ul>
             {{#allTrips}}
             <li>
-                <form method="POST" action="/delete-trip">
+                <form method="POST" action="add-trip/delete-trip">
                     <div class="tripContainer">
 
                         <div class="tripInfo">
@@ -36,7 +36,7 @@
                             <input type="hidden" value="{{tripId}}" name="tripId" id="">
                             <button id="delete">Delete</button>
                         </div>
-                        <div><img src="{{image}}" alt=""></div>
+                        <div><img id="tripImage"src="{{image}}" alt=""></div>
                     </div>
 
 

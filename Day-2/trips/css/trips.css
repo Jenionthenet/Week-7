@@ -2,6 +2,25 @@
   margin-top: 50px;
 }
 
+#homeDiv {
+  margin-top: 50px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+}
+
+#homeTitle {
+  font-size: 5em;
+  color: #240768;
+}
+
+#homeSubTitle {
+  font-size: 3em;
+  color: #240768;
+}
+
 #title {
   font-size: 3em;
 }
@@ -95,10 +114,49 @@ li {
   list-style-type: none;
 }
 
-img {
+#tripImage {
   height: 400px;
   border-radius: 12px;
   margin: 20px 20px 20px 50px;
+}
+
+#picDiv {
+  position: relative;
+}
+
+#picDiv img {
+  border-radius: 12px;
+}
+
+#picDiv #map {
+  margin-top: 50px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  width: 80%;
+}
+
+.smallPics {
+  height: 150px;
+}
+
+#ghana {
+  position: absolute;
+  top: 100px;
+  left: -100px;
+}
+
+#peru {
+  position: absolute;
+  bottom: 150px;
+  right: 100px;
+}
+
+#germany {
+  position: absolute;
+  bottom: -70px;
+  left: 180px;
 }
 
 .tripContainer {
