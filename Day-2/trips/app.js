@@ -5,8 +5,12 @@ const path = require('path')
 const tripsRouter = require('./routes/add-trip')
 
 const app = express()
+const pgp = require('pg-promise')()
+const connectionString = 'postgres://sbidvauh:JCPQV131cCM69LblBHPDoKegZ34jD3aJ@chunee.db.elephantsql.com/sbidvauh'
+const db = pgp(connectionString)
+console.log(db)
 const VIEWS_PATH = path.join(__dirname, '/views')
-const authenticate = require('./authentication/auth.js')
+// const authenticate = require('./authentication/auth.js')
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 
@@ -26,18 +30,18 @@ app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 app.set('views', VIEWS_PATH)
 app.set('view engine', 'mustache')
 
-app.use('/add-trip', authenticate, tripsRouter)
+app.use('/add-trip', tripsRouter)
 let users = [ 
     {userName: "jenscott", password: "password"}, 
     {userName: "happyperson", password: "1234"}
 ]
 
 
- global.trips = [
-         {title: "New York", image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fG5ldyUyMHlvcmslMjBjaXR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", departureDate: "8-12-2021" , returnDate: "8-19-2021", userName: "jenscott"},
-         {title: "Philadelphia", image: "https://images.unsplash.com/photo-1618312776768-c5926372a2f5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHBoaWxhZGVscGhpYXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", departureDate: "9-12-2021" , returnDate: "9-19-2021", userName:"happyperson"}
+//  global.trips = [
+//          {title: "New York", image: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fG5ldyUyMHlvcmslMjBjaXR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", departureDate: "8-12-2021" , returnDate: "8-19-2021", userName: "jenscott"},
+//          {title: "Philadelphia", image: "https://images.unsplash.com/photo-1618312776768-c5926372a2f5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHBoaWxhZGVscGhpYXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", departureDate: "9-12-2021" , returnDate: "9-19-2021", userName:"happyperson"}
 
- ]
+//  ]
 
  app.get('/chat', (req,res) => {
     res.sendFile(__dirname + '/chat.html')

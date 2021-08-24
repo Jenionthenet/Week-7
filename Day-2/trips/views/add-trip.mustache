@@ -1,53 +1,62 @@
 <html>
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="css/trips.css">
     <title>{{userName}}'s Trips Page</title>
 </head>
 
 <body>
     {{> menu}}
-          <h1>Welcome {{userName}} to your trips page!</h1>
-        <h1 id="title">Add Trip</h1>
+    <h1>Welcome {{userName}} to your trips page!</h1>
+    <h1 id="title">Add Trip</h1>
 
-        <form method="POST" action="/add-trip">
-            <div id="inputDiv">
-                <input type="text" placeholder="Enter title" name="title" />
-                <input type="text" placeholder="Enter image Url" name="image" />
-                <input type="date" name="departureDate" />
-                <input type="date" name="returnDate" />
-                <button>Enter</button>
-            </div>
-        </form>
+    <form method="POST" action="/add-trip">
+        <div id="inputDiv">
+            <input type="text" placeholder="Enter title" name="title" />
+            <input type="text" placeholder="Enter image Url" name="image" />
+            <input type="date" name="departureDate" />
+            <input type="date" name="returnDate" />
+            <button>Enter</button>
+        </div>
+    </form>
 
-        <h1>Trips</h1>
-        <h3>Total Number of Trips: {{totalTrips}}</h3>
-        <ul>
-            {{#allTrips}}
-            <li>
-                <form method="POST" action="add-trip/delete-trip">
-                    <div class="tripContainer">
+    <h1>Trips</h1>
+    <h3>Total Number of Trips: {{totalTrips}}</h3>
+    <ul>
+        {{#trips}}
+        <li>
+            <form method="POST" action="add-trip/delete-trip">
+                <div class="tripContainer">
 
-                        <div class="tripInfo">
-                            <h3>{{title}}</h3>
-                            <h4>From: {{departureDate}} To:
-                                {{returnDate}}</h4>
-                            <input type="hidden" value="{{tripId}}" name="tripId" id="">
-                            <button id="delete">Delete</button>
+                    <div class="tripInfo">
+                        <h3>{{title}}</h3>
+                        <div id="dateInfo">
+                            <h4 class="dates"><strong>From:</strong></h4>
+                            <h4 class="dates"> {{departure_date}}</h4>
+                            <h4 class="dates"><strong>To:</strong> </h4>
+                            <h4 class="dates">{{return_date}}</h4>
                         </div>
-                        <div><img id="tripImage"src="{{image}}" alt=""></div>
+                        <input type="hidden" value="{{trip_id}}" name="tripId" id="">
+                        <button id="delete">Delete</button>
                     </div>
+                    <div><img id="tripImage" src="{{image_url}}" alt=""></div>
+                </div>
 
 
-                </form>
-            </li>
+            </form>
+        </li>
 
-            {{/allTrips}}
-        </ul>
+        {{/trips}}
+    </ul>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+        integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+        integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

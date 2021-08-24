@@ -180,8 +180,12 @@ li {
 }
 
 .tripInfo {
-  margin-left: 20px;
+  padding-left: 20px;
   color: #240768;
+  margin-left: 20px;
+}
+
+.tripInfo h3 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -195,21 +199,44 @@ li {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-.tripInfo h3 {
-  font-size: 2em;
-  margin-bottom: 10px;
+  font-size: 2.4em;
+  margin-bottom: 20px;
 }
 
 .tripInfo h4 {
-  font-size: 1.2em;
+  font-size: 1.5em;
+}
+
+.tripInfo #delete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+#dateInfo {
+  margin-bottom: 30px;
+}
+
+.dates {
+  text-align: left;
 }
 
 #delete {
   background-color: transparent;
   border-radius: 7px;
   border: #240768 solid 1px;
+  margin: auto;
+  width: 80%;
 }
 
 #delete:hover {
