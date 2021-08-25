@@ -84,16 +84,6 @@ h3 {
           flex-direction: row;
 }
 
-button {
-  width: 70px;
-  height: 40px;
-  border-radius: 7px;
-}
-
-button:hover {
-  background: #e29c9c;
-}
-
 ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -241,5 +231,48 @@ li {
 
 #delete:hover {
   background: coral;
+}
+
+#registration {
+  margin: 0 20px 50px 20px;
+  width: 90%;
+}
+
+#registerContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: auto;
+  margin-top: 100px;
+  padding: 0 30px 20px 30px;
+  width: 50%;
+  border: 1px solid #665f5f;
+  border-radius: 12px;
+}
+
+button {
+  width: 70px;
+  height: 40px;
+  border-radius: 7px;
+}
+
+button:hover {
+  background: #e29c9c;
+}
+
+#registerBtn {
+  width: 97.5%;
+  margin: auto;
+  margin-top: 15px;
 }
 /*# sourceMappingURL=trips.css.map */

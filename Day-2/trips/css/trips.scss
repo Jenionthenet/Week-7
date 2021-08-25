@@ -54,14 +54,7 @@ h3 {
     @include flexCenter(row)
 }
 
-button {
-    width: 70px;
-    height: $inputHeight;
-    border-radius: $btnRadius;
-    &:hover{
-        background: rgb(226, 156, 156);
-    }
-}
+
 
 ul {
     @include flexCenter(column);
@@ -175,4 +168,39 @@ li{
     &:hover {
         background: coral;
     }
+}
+
+// .registration {
+//     width: 50%;
+// }
+
+#registration {
+    margin: 0 20px 50px 20px;
+    width: 90%;
+}
+
+#registerContainer {
+    @include flexCenter(column);
+    
+    margin: auto;
+    margin-top: 100px;
+    padding: 0 30px 20px 30px;
+    width: 50%;
+    border: 1px solid rgb(102, 95, 95);
+    border-radius: $lgBorderRadius;
+}
+
+button {
+    width: 70px;
+    height: $inputHeight;
+    border-radius: $btnRadius;
+    &:hover{
+        background: rgb(226, 156, 156);
+    }
+}
+
+#registerBtn {
+    width: 97.5%;
+    margin: auto;
+    margin-top: 15px;
 }

@@ -6,7 +6,10 @@ const db = pgp(connectionString)
 console.log(db)
 
 router.get('/', (req, res) => {
-    db.any('SELECT trip_id, title, departure_date, return_date, image_url FROM trips')
+    const userId = req.session.user.userId
+    // const userName = req.session.user.userName
+
+    db.any('SELECT trip_id, title, departure_date, return_date, image_url FROM trips WHERE user_id = $1', [userId])
     .then(trips => {
      console.log(trips) 
      res.render('add-trip', {trips:trips})  
@@ -21,8 +24,10 @@ router.post('/',(req, res) => {
     const departureDate = req.body.departureDate
     const returnDate = req.body.returnDate
     const image = req.body.image 
+    const userId = req.session.user.userId
+    
 
-    db.none('INSERT INTO trips(title, departure_date, return_date, image_url)VALUES($1, $2, $3, $4)', [title, departureDate, returnDate, image])
+    db.none('INSERT INTO trips(title, departure_date, return_date, image_url, user_id, username)VALUES($1, $2, $3, $4, $5, $6)', [title, departureDate, returnDate, image, userId, userName])
     .then(() => {
         res.redirect('/add-trip')
     })
@@ -31,7 +36,7 @@ router.post('/',(req, res) => {
 
     // trips.push(trip)
     // console.log(trips)
-    res.redirect('/add-trip')
+    // res.redirect('/add-trip')
 })
 
 // app.get('/home', (req, res) => {

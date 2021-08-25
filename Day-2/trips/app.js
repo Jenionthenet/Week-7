@@ -3,6 +3,7 @@ const mustacheExpress = require('mustache-express')
 const session = require('express-session')
 const path = require('path')
 const tripsRouter = require('./routes/add-trip')
+var bcrypt = require('bcryptjs');
 
 const app = express()
 const pgp = require('pg-promise')()
@@ -10,7 +11,7 @@ const connectionString = 'postgres://sbidvauh:JCPQV131cCM69LblBHPDoKegZ34jD3aJ@c
 const db = pgp(connectionString)
 console.log(db)
 const VIEWS_PATH = path.join(__dirname, '/views')
-// const authenticate = require('./authentication/auth.js')
+const authenticate = require('./authentication/auth.js')
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 
@@ -30,11 +31,11 @@ app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 app.set('views', VIEWS_PATH)
 app.set('view engine', 'mustache')
 
-app.use('/add-trip', tripsRouter)
-let users = [ 
-    {userName: "jenscott", password: "password"}, 
-    {userName: "happyperson", password: "1234"}
-]
+app.use('/add-trip', authenticate, tripsRouter)
+// let users = [ 
+//     {userName: "jenscott", password: "password"}, 
+//     {userName: "happyperson", password: "1234"}
+// ]
 
 
 //  global.trips = [
@@ -60,26 +61,49 @@ app.get('/register', (req, res) => {
     res.render('register', {message: "Enter a username and password to register."})
 })
 
-app.post('/register',(req, res) => {
+app.post ('/register', (req, res) => {
     const userName = req.body.userName
     const password = req.body.password
 
-    let user = {userName: userName, password: password}
-    users.push(user)
-
-    if(req.session) {
-        req.session.userName = userName
-        req.session.password = password
-    }
-    res.redirect('/confirm')
+    bcrypt.genSalt(10, function(error, salt) {
+        if(!error) {
+            bcrypt.hash(password, salt, function(error, hash) {
+                if(!error) {
+                    db.none('INSERT INTO users(username, password) VALUES($1, $2)', [userName, hash])
+                    .then(() => {
+                        console.log('User has been inserted')
+                        res.redirect('/login')
+                    })
+                } else {
+                    res.send('Error occured!')
+                }
+            })
+        } else {
+            res.send('Error occured!')
+        }
+    })
 })
 
-app.get('/confirm', (req,res) => {
-    const userName = req.session.userName
-    const password = req.session.password
+// app.post('/register',(req, res) => {
+//     const userName = req.body.userName
+//     const password = req.body.password
 
-    res.render('confirm', {userName: userName, password: password})
-})
+//     let user = {userName: userName, password: password}
+//     users.push(user)
+
+//     if(req.session) {
+//         req.session.userName = userName
+//         req.session.password = password
+//     }
+//     res.redirect('/confirm')
+// })
+
+// app.get('/confirm', (req,res) => {
+//     const userName = req.session.userName
+//     const password = req.session.password
+
+//     res.render('confirm', {userName: userName, password: password})
+// })
 
 app.get('/login', (req, res) => {
     res.render('login')
@@ -90,23 +114,49 @@ app.post('/login', (req, res) => {
     const userName = req.body.userName
     const password = req.body.password
 
-    const confirmedUser = users.find((user) => {
-        return user.userName == userName && user.password == password 
-    })
-    if(confirmedUser){
-        if(req.session) {
-            req.session.userName = userName
-        }
-        res.redirect('/add-trip')
-    } else {
-        res.render('login', {message: "Username and/or password is incorrect"})
-    }
-})
+    // const confirmedUser = users.find((user) => {
+    //     return user.userName == userName && user.password == password 
+    // })
+    // const confirmedUser = sbidvauh.users.find({
+    //     where: {
+    //         userName,
+    //     }
+    // })
+    
+    db.one('SELECT user_id, username, password FROM users WHERE username = $1', [userName])
+        .then((user) => {
+            bcrypt.compare(password, user.password, function (error, result) {
+                if (result) {
+                    
+                    if(req.session) {
+                       req.session.user = {userName: user.username, userId: user.user_id}
+                       res.redirect('/home')
+                    }
+                
+                } else {
+                    res.render('login', {message: "Username and/or password is incorrect!"})
+                }
+            })
+        }).catch((error) => {
+            console.log(error)
+            res.send('User not found!')
+        })
 
-app.get('/profile', (req, res) => {
-    const userName = req.session.userName
-    res.render('profile', {userName: userName})
-})
+    })
+//     if(confirmedUser){
+//         if(req.session) {
+//             req.session.userName = userName
+//         }
+//         res.redirect('/add-trip')
+//     } else {
+//         res.render('login', {message: "Username and/or password is incorrect"})
+//     }
+// })
+
+// app.get('/profile', (req, res) => {
+//     const userName = req.session.userName
+//     res.render('profile', {userName: userName})
+// })
 
 
 app.get('/sign-out', (req, res) => {
@@ -115,7 +165,7 @@ app.get('/sign-out', (req, res) => {
         res.clearCookie('connect.sid')
         res.redirect('/home')
     }) 
-    console.log(trips)
+   
 })
 
 app.get('/home', (req, res) => {
